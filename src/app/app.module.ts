@@ -7,6 +7,11 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {SchedulerComponent} from "./components/scheduler.component";
 
+import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
+import {InMemoryDataService} from './services/in-memory-data.service';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,7 +20,8 @@ import {SchedulerComponent} from "./components/scheduler.component";
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
   providers: [],
   bootstrap: [AppComponent]
