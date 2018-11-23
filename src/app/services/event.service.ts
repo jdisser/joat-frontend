@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Event} from "../models/event";
 import {Http} from "@angular/http";
 import {ExtractData, HandleError} from "./service-helper";
-import 'rxjs/add/operator/toPromise';
+//import 'rxjs/add/operator/toPromise';
 
 
 @Injectable()

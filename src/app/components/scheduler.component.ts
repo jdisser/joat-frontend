@@ -2,7 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from "@angu
 import "dhtmlx-scheduler";
 import {} from "@types/dhtmlxscheduler";
 import {EventService} from "../services/event.service";
-import {Event} from "../models/Event";
+import {Event} from "../models/event";
 
 @Component({
   encapsulation: ViewEncapsulation.None,
