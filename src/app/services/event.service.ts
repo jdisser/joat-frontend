@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Event} from "../models/event";
 import {Http} from "@angular/http";
 import {ExtractData, HandleError} from "./service-helper";
-//import 'rxjs/add/operator/toPromise';
+
 
 
 @Injectable()
@@ -13,6 +13,7 @@ export class EventService{
   constructor(private http: Http) {}
 
   get(): Promise<Event[]>{
+    console.log("In get service...")
     return this.http.get(this.eventUrl)
       .toPromise()
       .then(ExtractData)

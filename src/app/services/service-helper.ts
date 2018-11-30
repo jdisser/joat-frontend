@@ -1,8 +1,10 @@
 import {Response} from '@angular/http';
 
 export function ExtractData(res: Response): any {
-  let body = res.json();
-  return body && body.data ? body.data: {};
+  console.log(res.text());
+  //let body = res.json();
+  //return body && body.data ? body.data: {};
+  return res.text();
 }
 
 export function HandleError(error: any): Promise<any>{
