@@ -24,8 +24,14 @@ export class SchedulerComponent implements OnInit {
     scheduler.attachEvent("onEventAdded", (id, ev) => {
       this.eventService.insert(this.serializeEvent(ev, true))
         .then((response) => {
+
+          console.log(response);
+          console.log(response.id);
+          console.log(id);
+
+
           if(response.id != id) {
-            scheduler.changeEventId(id, response.id);
+            scheduler.changeEventId(id, response.id.toString());
           }
         })
     });
