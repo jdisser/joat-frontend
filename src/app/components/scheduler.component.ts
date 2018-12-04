@@ -27,21 +27,30 @@ export class SchedulerComponent implements OnInit {
       this.eventService.insert(this.serializeEvent(ev, true))
         .subscribe((event: Event) => {
           if(event.id != id) {
-            scheduler.changeEventId(id, event.id.toString());
+            console.log("changing event id");
+            scheduler.changeEventId(id, event.id.toString());  //<<---- id is string in scheduler!!!
           }
         })
     });
 
     scheduler.attachEvent("onEventChanged", (id, ev) => {
-      this.eventService.update(this.serializeEvent(ev));
+      console.log("in update event handler lambda...");
+      console.log(ev);
+      this.eventService.update(this.serializeEvent(ev))
+        .subscribe((data: any) => {
+          console.log("from db: " + data);
+        });
     });
 
     scheduler.attachEvent("onEventDeleted", (id) => {
-      this.eventService.remove(id);
+      this.eventService.remove(id)
+        .subscribe((data: any) => {
+          console.log("from db: " + data);
+        });
     });
 
     this.eventService.get()
-      .then((data) => {
+      .subscribe((data) => {
         scheduler.parse(data, "json");
       });
   }
@@ -57,6 +66,9 @@ export class SchedulerComponent implements OnInit {
       if(data[i] instanceof Date){
         result[i] = scheduler.templates.xml_format(data[i]);
       } else {
+          if(i == "id"){                //dhtmlx stores the id as a string!!!
+            data[i] = Number(data[i]);
+          }
           result[i] = data[i];
       }
     }
