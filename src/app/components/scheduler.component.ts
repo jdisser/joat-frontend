@@ -17,21 +17,17 @@ export class SchedulerComponent implements OnInit {
 
   constructor(private eventService: EventService){}
 
+
+
   ngOnInit(){
     scheduler.config.xml_date = "%Y-%m-%d %H:%i";
     scheduler.init(this.schedulerContainer.nativeElement);
 
     scheduler.attachEvent("onEventAdded", (id, ev) => {
       this.eventService.insert(this.serializeEvent(ev, true))
-        .then((response) => {
-
-          console.log(response);
-          console.log(response.id);
-          console.log(id);
-
-
-          if(response.id != id) {
-            scheduler.changeEventId(id, response.id.toString());
+        .subscribe((event: Event) => {
+          if(event.id != id) {
+            scheduler.changeEventId(id, event.id.toString());
           }
         })
     });
