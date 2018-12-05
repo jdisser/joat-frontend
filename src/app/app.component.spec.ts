@@ -2,13 +2,20 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { SchedulerComponent } from './components/scheduler.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { InMemoryDataService } from './services/in-memory-data.service';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
         SchedulerComponent
-      ], imports: [HttpClientTestingModule]
+      ], imports: [
+        HttpClientTestingModule,
+        HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService)
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {
