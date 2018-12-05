@@ -1,8 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from "@angular/core";
 import "dhtmlx-scheduler";
-import {} from "@types/dhtmlxscheduler";
+//import {} from "@types/dhtmlxscheduler";
 import {EventService} from "../services/event.service";
 import {Event} from "../models/event";
+declare let scheduler: any;   //added this and removed @types for testing
 
 @Component({
   encapsulation: ViewEncapsulation.None,
