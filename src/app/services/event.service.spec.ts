@@ -43,6 +43,17 @@ describe('EventService', () => {
         );
   }));
 
+  it('can get an event by id', async(() => {
+    eventService.getId(1)
+      .subscribe(
+        event => {
+          console.log(event);
+          expect(event.id).toEqual(1, 'failed to get event by id');
+        },
+          () => fail('event.service.getId failed')
+        );
+  }));
+
   it('can save an event', async(() => {
     let event: Event = {
       id: 2345,
