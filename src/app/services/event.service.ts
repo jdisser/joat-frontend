@@ -26,6 +26,16 @@ export class EventService{
 
   }
 
+  getId(id: number): Observable<Event>{
+    console.log("In get id service...");
+    return this.http.get<Event>(`${this.eventUrl}/${id}`)
+      .pipe(
+        // tap(data => console.log(data)),
+        catchError(this.handleError)
+      );
+
+  }
+
   insert(event: Event): Observable<Event> {
     console.log("In insert service...");
     console.log(event);

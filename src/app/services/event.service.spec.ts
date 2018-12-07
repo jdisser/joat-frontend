@@ -43,5 +43,35 @@ describe('EventService', () => {
         );
   }));
 
+  it('can save an event', async(() => {
+    let event: Event = {
+      id: 2345,
+      start_date: "2018-12-04 18:00",
+      end_date: "2018-12-04 19:00",
+      text: "Test Event"};
+
+    let dbId: number = 0;
+
+    eventService.insert(event)
+      .subscribe(eventDb => {
+        console.log("returned from backend...");
+        console.log(eventDb);
+        dbId = eventDb.id;
+        expect(eventDb.id).toBeGreaterThan(2, 'id not greater than seed data');
+      },
+      () => fail('event created response not as expected')
+      );
+
+    eventService.getId(dbId)
+      .subscribe(eventDb => {
+        console.log("returned from db:");
+        console.log(eventDb);
+        expect(eventDb.text).toEqual('Test Event', 'text does not match');
+      },
+        () => fail('event not retrieved')
+      );
+
+  }));
+
 
 });
