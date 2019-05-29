@@ -1,3 +1,4 @@
+import 'jasmine';
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { SchedulerComponent } from './components/scheduler.component';
